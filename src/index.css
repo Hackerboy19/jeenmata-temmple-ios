@@ -1,0 +1,255 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Local Fonts */
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/Font/Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf') format('truetype');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/Font/Playfair_Display/PlayfairDisplay-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 400 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Temple Divine Colors */
+    --background: 39 100% 97%;
+    --foreground: 0 100% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 100% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 100% 15%;
+
+    /* Deep Maroon - Primary temple color */
+    --primary: 0 100% 25%;
+    --primary-foreground: 39 100% 94%;
+
+    /* Temple Red - Secondary color */
+    --secondary: 0 68% 42%;
+    --secondary-foreground: 39 100% 94%;
+
+    /* Golden - Accent color */
+    --accent: 51 100% 50%;
+    --accent-foreground: 0 100% 15%;
+
+    /* Cream - Muted backgrounds */
+    --muted: 39 100% 94%;
+    --muted-foreground: 0 50% 30%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 39 100% 94%;
+
+    --border: 39 50% 85%;
+    --input: 39 50% 85%;
+    --ring: 51 100% 50%;
+
+    --radius: 0.5rem;
+
+    /* Divine gradient colors */
+    --divine-gradient-start: 0 100% 25%;
+    --divine-gradient-mid: 0 68% 42%;
+    --divine-gradient-end: 51 100% 50%;
+
+    /* Glow effects */
+    --golden-glow: 51 100% 50%;
+    --diya-glow: 25 100% 50%;
+  }
+
+  .dark {
+    --background: 0 50% 8%;
+    --foreground: 39 100% 94%;
+
+    --card: 0 50% 12%;
+    --card-foreground: 39 100% 94%;
+
+    --popover: 0 50% 12%;
+    --popover-foreground: 39 100% 94%;
+
+    --primary: 51 100% 50%;
+    --primary-foreground: 0 100% 15%;
+
+    --secondary: 0 68% 35%;
+    --secondary-foreground: 39 100% 94%;
+
+    --accent: 51 100% 50%;
+    --accent-foreground: 0 100% 15%;
+
+    --muted: 0 50% 15%;
+    --muted-foreground: 39 60% 70%;
+
+    --destructive: 0 62.8% 40%;
+    --destructive-foreground: 39 100% 94%;
+
+    --border: 0 50% 20%;
+    --input: 0 50% 20%;
+    --ring: 51 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Playfair Display', serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+
+  .font-playfair {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer utilities {
+  .divine-gradient {
+    background: linear-gradient(135deg, 
+      hsl(var(--divine-gradient-start)), 
+      hsl(var(--divine-gradient-mid)), 
+      hsl(var(--divine-gradient-end))
+    );
+  }
+
+  .golden-border {
+    border-color: hsl(var(--accent));
+    box-shadow: 0 0 20px hsl(var(--golden-glow) / 0.3);
+  }
+
+  .divine-shadow {
+    box-shadow: 0 10px 40px -10px hsl(var(--primary) / 0.4);
+  }
+
+  .diya-glow {
+    animation: diya-flicker 2s ease-in-out infinite;
+  }
+
+  @keyframes diya-flicker {
+    0%, 100% {
+      filter: drop-shadow(0 0 10px hsl(var(--diya-glow) / 0.6));
+    }
+    50% {
+      filter: drop-shadow(0 0 20px hsl(var(--diya-glow) / 0.8));
+    }
+  }
+
+  @keyframes float-up {
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100px) scale(0.5);
+      opacity: 0;
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(var(--accent) / 0.5);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(var(--accent) / 0.8), 0 0 60px hsl(var(--accent) / 0.4);
+    }
+  }
+
+  .fade-in-up {
+    animation: fade-in-up 0.6s ease-out;
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .lotus-pattern {
+    background-image: radial-gradient(circle at 20% 50%, hsl(var(--accent) / 0.05) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 50%, hsl(var(--accent) / 0.05) 0%, transparent 50%);
+  }
+
+  .float-animation {
+    animation: float-up 3s ease-in-out infinite;
+  }
+
+  .shimmer-text {
+    background: linear-gradient(90deg, 
+      hsl(var(--accent)), 
+      hsl(var(--accent-foreground)), 
+      hsl(var(--accent)));
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 3s linear infinite;
+  }
+
+  .pulse-glow-border {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .stagger-fade-in > * {
+    opacity: 0;
+    animation: fade-in-up 0.8s ease-out forwards;
+  }
+
+  .stagger-fade-in > *:nth-child(1) { animation-delay: 0.1s; }
+  .stagger-fade-in > *:nth-child(2) { animation-delay: 0.2s; }
+  .stagger-fade-in > *:nth-child(3) { animation-delay: 0.3s; }
+  .stagger-fade-in > *:nth-child(4) { animation-delay: 0.4s; }
+  .stagger-fade-in > *:nth-child(5) { animation-delay: 0.5s; }
+  .stagger-fade-in > *:nth-child(6) { animation-delay: 0.6s; }
+
+  .mantra-marquee {
+    display: inline-flex;
+    gap: 3rem;
+    min-width: 200%;
+    white-space: nowrap;
+    animation: mantra-scroll 20s linear infinite;
+  }
+
+  .mantra-marquee span {
+    letter-spacing: 0.1em;
+  }
+
+  @keyframes mantra-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+}
